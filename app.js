@@ -1,4 +1,6 @@
 let txtResultado = document.getElementById('resultado');
+let btnSortear = 'btn-sortear';
+let btnReiniciar = 'btn-reiniciar';
 
 function sortear() {
     let quantidade = parseInt(document.getElementById('quantidade').value);
@@ -7,28 +9,35 @@ function sortear() {
 
     let arrayNumsSorteados = [];
     let numero;
-
-    let i = 0;
-    for (i = 0; i < quantidade; i++) { 
-        numero = sortearNumAleatorio(numeroInicial, numeroFinal);
+    
+    if (numeroInicial >= numeroFinal){
+        alert('O número inicial não deve ser maior que o número final.');
+    } else {
+        let i = 0;
+        for (i = 0; i < quantidade; i++) { 
+            numero = sortearNumAleatorio(numeroInicial, numeroFinal);
 
         while (arrayNumsSorteados.includes(numero)) {
             numero = sortearNumAleatorio(numeroInicial, numeroFinal);
         }
 
         arrayNumsSorteados.push(numero);
+        }
+    
+        txtResultado.innerHTML = `<label class="texto__paragrafo">Números sorteados:  ${arrayNumsSorteados}</label>`;
+
+        desabilitaBotao(btnSortear);
+        habilitaBotao(btnReiniciar);
     }
-
-    txtResultado.innerHTML = `<label class="texto__paragrafo">Números sorteados:  ${arrayNumsSorteados}</label>`;
-
-    //desabilitaBotao(String('btn-sortear'));
-    //habilitaBotao(String('btn-reiniciar'));
 }
 
 function reiniciar() {
+    document.getElementById('quantidade').value = '';
+    document.getElementById('de').value = '';
+    document.getElementById('ate').value = '';
     txtResultado.innerHTML = '<label class="texto__paragrafo">Números sorteados:  nenhum até agora</label>';
-    //habilitaBotao(String('btn-sortear'));
-    //desabilitaBotao(String('btn-reiniciar'));
+    habilitaBotao(btnSortear);
+    desabilitaBotao(btnReiniciar);
 }
 
 
@@ -37,17 +46,17 @@ function sortearNumAleatorio(min, max){
 }
 
 function habilitaBotao(btn) {
-    let botao = document.getElementById(btn);
-    if (botao.classList.contains('container_botao-desabilitado')) {
-        botao.classList.remove('container_botao-desabilitado');
-        botao.classList.add('container_botao');
+    let botaoD = document.getElementById(btn);
+    if (botaoD.classList.contains('container__botao-desabilitado')) {
+        botaoD.classList.remove('container__botao-desabilitado');
+        botaoD.classList.add('container__botao');
     }
 }
 
 function desabilitaBotao(btn) {
-    let botao = document.getElementById(btn);
-    if (botao.classList.contains('container_botao')) {
-        botao.classList.remove('container_botao');
-        botao.classList.add('container_botao-desabilitado');
+    let botaoH = document.getElementById(btn);
+    if (botaoH.classList.contains('container__botao')) {
+        botaoH.classList.remove('container__botao');
+        botaoH.classList.add('container__botao-desabilitado');
     }
 }

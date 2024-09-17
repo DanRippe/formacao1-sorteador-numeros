@@ -110,6 +110,7 @@ body::before {
     font-weight: 700;
     border: none;
     cursor: not-allowed;
+    pointer-events: none;
 }
 
 h1 {
