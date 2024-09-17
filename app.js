@@ -10,9 +10,16 @@ function sortear() {
     let arrayNumsSorteados = [];
     let numero;
     
-    if (numeroInicial >= numeroFinal){
+    if (!quantidade || !numeroInicial || !numeroFinal) {
+        alert('Nenhum dos campos devem estar vazios.');
+    } else if (numeroInicial >= numeroFinal){
         alert('O número inicial não deve ser maior que o número final.');
     } else {
+        let quantidadePossivel = numeroFinal - numeroInicial;
+
+        if (quantidade > quantidadePossivel) {
+            alert('A quantidade de números para sortear é maior do que a quantidade possível de ser sorteada.');
+        } else {
         let i = 0;
         for (i = 0; i < quantidade; i++) { 
             numero = sortearNumAleatorio(numeroInicial, numeroFinal);
@@ -28,6 +35,7 @@ function sortear() {
 
         desabilitaBotao(btnSortear);
         habilitaBotao(btnReiniciar);
+        }
     }
 }
 
